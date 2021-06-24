@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
+System_Boundary(authsysBoundary, "Auth Server") {
+    Container(idsServer, "AuthServer", "IdentityServer4", "Manages the Authentication, API Access")
+}
+
+System_Ext(mailgunAPI, "MailgunAPI", "API that enable you to send emails")
+Person(htuser, "High Tower User", "High Tower user, like administrators")
+
+LAYOUT_WITH_LEGEND()
+
+Rel(coresys, mailgunAPI, "Send e-mails")
+Rel(idsServer, coresys, "Consumes")
+Rel(htuser, idsServer, "Uses")
+@enduml

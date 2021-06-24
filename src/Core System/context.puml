@@ -1,0 +1,27 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+System_Boundary(coreSysBoundary, "Core Systems") {
+    Container(personsAPI, "PersonsAPI", "ASP.NET Core WebAPI", "")
+    Container(schedulerAPI, "SchedulerAPI", "ASP.NET Core WebAPI", "")
+    Container(notificationAPI, "NotificationAPI", "ASP.NET Core WebAPI", "")
+    Container(i18NApi, "I18NApi", "ASP.NET Core WebAPI", "")
+    Container(storageAPI, "StorageAPI", "ASP.NET Core WebAPI", "")
+
+    Rel(schedulerAPI, notificationAPI, "Consumes")
+    Rel(notificationAPI, i18NApi, "Consumes")
+    Rel(notificationAPI, storageAPI, "Consumes")
+}
+System_Ext(mailgunAPI, "MailgunAPI", "API that enable you to send emails")
+System(covidtrackersys, "Covid Tracker System", "Allows customers to log, view test inforamtion and follow their lifecyle, regarding comunication to the authorities.")
+
+
+Rel(notificationAPI, mailgunAPI, "Consumes")
+Rel(covidtrackersys, notificationAPI, "Consumes")
+Rel(covidtrackersys, schedulerAPI, "Consumes")
+Rel(covidtrackersys, personsAPI, "Consumes")
+
+@enduml

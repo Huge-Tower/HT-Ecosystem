@@ -1,15 +1,20 @@
-@startuml
+@startuml Context
 !include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
 
 LAYOUT_WITH_LEGEND()
 
-Person(pbc, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
-System(ibs, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
-System_Ext(es, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-System_Ext(mbs, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+System(authsys, "Authorization System", "Manages the Authentication, API Access")
+Person_Ext(covidtrackeruser, "Customers", "A customer of the Covid Tracker Solution")
+Person(htuser, "Users", "High Tower genericuser")
+System(covidtrackersys, "Covid Tracker System", "Allows customers to log, view test inforamtion and follow their lifecyle, regarding comunication to the authorities.")
+System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
 
-Rel(pbc, ibs, "Uses")
-Rel(es, pbc, "Sends e-mails to")
-Rel(ibs, es, "Sends e-mails", "SMTP")
-Rel(ibs, mbs, "Uses")
+System_Ext(mailgunAPI, "MailgunAPI", "API that enable you to send emails")
+
+Rel(coresys, mailgunAPI, "Send e-mails")
+Rel(authsys, coresys, "Consumes")
+Rel(htuser, authsys, "Uses")
+Rel(covidtrackeruser,htuser , "Extends")
+Rel(covidtrackersys, coresys, "Consumes")
+Rel(covidtrackeruser, covidtrackersys, "Uses")
 @enduml

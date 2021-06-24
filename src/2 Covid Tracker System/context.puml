@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+System_Boundary(covidtrackerBoundary, "Covid Tracker System") {
+    Container(angularCovidTracker, "Single Page Application", "Angular App", "Delivers the static content and the internet banking single page application.")
+    Container(androidCovidTracker, "Mobile App", "Android App", "Delivers the static content and the internet banking single page application.")
+    Container(apiCovidTracker, "API Application", "ASP.NET Core WebAPI", "Delivers the static content and the internet banking single page application.")
+    ContainerDb(dbCovidTracker, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+
+    Rel(angularCovidTracker, apiCovidTracker, "Uses")
+    Rel(androidCovidTracker, apiCovidTracker, "Uses")
+    Rel(apiCovidTracker, dbCovidTracker, "Uses")
+}
+Person_Ext(covidtrackeruser, "Covid Tracker User", "A customer of the Covid Tracker Solution")
+System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
+
+
+Rel(covidtrackeruser, androidCovidTracker, "Uses")
+Rel(covidtrackeruser, angularCovidTracker, "Uses")
+Rel(apiCovidTracker, coresys, "REST to PersonsAPI")
+Rel(apiCovidTracker, coresys, "REST to SchedulerAPI")
+Rel(apiCovidTracker, coresys, "REST to NotificationAPI")
+
+@enduml
