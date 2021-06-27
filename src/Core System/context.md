@@ -1,0 +1,1 @@
+**Core Container diagram**

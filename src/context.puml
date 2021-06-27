@@ -1,20 +1,27 @@
 @startuml Context
 !include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
-
+LAYOUT_LEFT_RIGHT()
 LAYOUT_WITH_LEGEND()
 
 System(authsys, "Authorization System", "Manages the Authentication, API Access")
-Person_Ext(covidtrackeruser, "Customers", "A customer of the Covid Tracker Solution")
-Person(htuser, "Users", "High Tower genericuser")
-System(covidtrackersys, "Covid Tracker System", "Allows customers to log, view test inforamtion and follow their lifecyle, regarding comunication to the authorities.")
 System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
+Rel(authsys, coresys, "Consumes")
+Person(htuser, "Users", "High Tower genericuser")
+Rel(htuser, authsys, "Uses")
 
 System_Ext(mailgunAPI, "MailgunAPI", "API that enable you to send emails")
-
 Rel(coresys, mailgunAPI, "Send e-mails")
-Rel(authsys, coresys, "Consumes")
-Rel(htuser, authsys, "Uses")
-Rel(covidtrackeruser,htuser , "Extends")
+
+Person_Ext(covidtrackeruser, "Customers", "A customer of the Covid Tracker Solution")
+System(covidtrackersys, "Covid Tracker System","It's tool where a healh service provider company can log/track/manage the Covid Tests that they collect.")
+Rel_L(covidtrackeruser,htuser , "Extends")
 Rel(covidtrackersys, coresys, "Consumes")
 Rel(covidtrackeruser, covidtrackersys, "Uses")
+
+' System(futuresys, "'Future' System", "Future System")
+' Person_Ext(futureUsersys, "Future User")
+' Rel(futureUsersys, futuresys, "Uses")
+' Rel(futureUsersys,htuser , "Extends")
+' Rel(futuresys, coresys, "Consumes")
+
 @enduml

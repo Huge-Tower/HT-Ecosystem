@@ -1,0 +1,112 @@
+@startuml kubernetes
+
+footer HugeTower EcoSystem
+scale max 1024 width
+
+skinparam nodesep 10
+skinparam ranksep 10
+
+' Kubernetes
+!define KubernetesPuml https://raw.githubusercontent.com/dcasati/kubernetes-PlantUML/master/dist
+left to right direction
+
+!includeurl KubernetesPuml/kubernetes_Common.puml
+!includeurl KubernetesPuml/kubernetes_Context.puml
+!includeurl KubernetesPuml/kubernetes_Simplified.puml
+
+!includeurl KubernetesPuml/OSS/KubernetesSvc.puml
+!includeurl KubernetesPuml/OSS/KubernetesIng.puml
+!includeurl KubernetesPuml/OSS/KubernetesPod.puml
+!includeurl KubernetesPuml/OSS/KubernetesRs.puml
+!includeurl KubernetesPuml/OSS/KubernetesDeploy.puml
+!includeurl KubernetesPuml/OSS/KubernetesHpa.puml
+
+actor "User" as userAlias
+
+' Kubernetes Components
+Cluster_Boundary(cluster, "Kubernetes Cluster") {
+    Namespace_Boundary(asNameSpace, "AuthService") {
+        KubernetesIng(asNameSpaceIngress, "identity.hightower.dev", "")
+        Rel_D(userAlias,asNameSpaceIngress," ")
+        KubernetesSvc(asSvc, "", "")
+        Rel(asNameSpaceIngress,asSvc," ")
+        KubernetesPod(aspod1, "IdS", "")
+        Rel(asSvc,aspod1," ")
+        
+        KubernetesRs(asrs,"","")
+        Rel_U(asrs,aspod1," ")
+        KubernetesDeploy(asdeploy,"","")
+        Rel_U(asdeploy,asrs, " ")
+        KubernetesHpa(ashpa, "", "")
+        Rel_U(ashpa,asdeploy, " ")
+    }
+
+   Namespace_Boundary(ctNameSpace, "CovidTracker") {
+        KubernetesIng(cthtIngress, "covidtracker.hightower.dev", "")
+        KubernetesIng(ctfsIngress, "covidtracker.formasimples.pt", "")
+
+        Rel_D(userAlias,cthtIngress," ")
+        Rel_D(userAlias,ctfsIngress," ")
+
+        KubernetesSvc(ctSvc, "CovidTracker Svc", "")
+        Rel(cthtIngress,ctSvc," ")
+        Rel(ctfsIngress,ctSvc," ")
+
+        KubernetesPod(ctpodN, "podN", "")
+        Rel(ctSvc,ctpodN," ")
+        
+        KubernetesRs(ctrs,"","")
+        Rel_U(ctrs,ctpodN," ")
+        KubernetesDeploy(ctdeploy,"","")
+        Rel_U(ctdeploy,ctrs, " ")
+        KubernetesHpa(cthpa, "", "")
+        Rel_U(cthpa,ctdeploy, " ")
+    }
+
+    Namespace_Boundary(csNameSpace, "CoreSystem") {
+        KubernetesSvc(csPersonAPISvc, "PersonApi", "")
+
+        KubernetesPod(cspod1, "pod1 c", "")
+        KubernetesPod(csNotficitionPod1, "pod1 b", "")
+        KubernetesPod(csSchedulerPod1, "pod1 a", "")
+
+        KubernetesRs(csrs1,cspod1,"","")
+        KubernetesRs(csNotficitionRs1,"","")
+        KubernetesRs(csSchedulerRs1,"","")
+        KubernetesDeploy(csPersonAPISvc,"deployment","")
+        KubernetesDeploy(csNotfificationAPISvc,"deployment","")
+        KubernetesDeploy(csSchedulerSvc,"deployment","")
+        KubernetesHpa(cshpa, "HPA", "")
+        KubernetesHpa(csnotificationhpa, "HPA", "")
+        KubernetesHpa(csSchedulerhpa, "HPA", "")
+        KubernetesSvc(csPersonSvc, "PersonsAPI Svc", "")
+        KubernetesSvc(csNotificationSvc, "NotificatioAPI Svc", "")
+        KubernetesSvc(csScheduler, "Scheduler Svc", "")
+
+        Rel_U(cshpa,csNotfificationAPISvc, " ")
+        Rel_U(csnotificationhpa,csPersonAPISvc, " ")
+        Rel_U(csSchedulerhpa,csSchedulerSvc, " ")
+
+        
+        Rel_U(csrs1,cspod1," ")
+        Rel_U(csSchedulerRs1,csSchedulerPod1," ")
+        Rel_U(csNotficitionRs1,csNotficitionPod1," ")
+        Rel_U(csPersonAPISvc,csrs1," ")
+        Rel_U(csSchedulerSvc,csSchedulerRs1," ")
+
+        Rel_U(csNotfificationAPISvc,csNotficitionRs1," ")
+        Rel_D(csPersonSvc,cspod1,"")
+        Rel(ctpodN,csPersonSvc,"")
+        Rel(aspod1,csPersonSvc,"")
+
+        Rel_D(csNotificationSvc,csNotficitionPod1,"")
+        Rel(ctpodN,csNotificationSvc,"")
+        Rel(aspod1,csNotificationSvc,"")
+        Rel(ctpodN,csScheduler,"")
+        
+        Rel_D(csScheduler,csSchedulerPod1 ,"")
+    }
+}
+
+
+@enduml

@@ -2,6 +2,8 @@
 !include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
 
 
+LAYOUT_LEFT_RIGHT()
+
 LAYOUT_WITH_LEGEND()
 
 System_Boundary(coreSysBoundary, "Core Systems") {
@@ -11,7 +13,7 @@ System_Boundary(coreSysBoundary, "Core Systems") {
     Container(i18NApi, "I18NApi", "ASP.NET Core WebAPI", "")
     Container(storageAPI, "StorageAPI", "ASP.NET Core WebAPI", "")
 
-    Rel(schedulerAPI, notificationAPI, "Consumes")
+    Rel_R(schedulerAPI, notificationAPI, "Consumes")
     Rel(notificationAPI, i18NApi, "Consumes")
     Rel(notificationAPI, storageAPI, "Consumes")
 }

@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define MATERIAL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/material
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include MATERIAL/phone_android.puml
+!include DEVICONS/java.puml
+!include DEVICONS/msql_server.puml
+!include DEVICONS/mongodb.puml
+!include FONTAWESOME/users.puml
+!include FONTAWESOME/server.puml
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+System_Boundary(covidtrackerBoundary, "Covid Tracker System") {
+    Container(angularCovidTracker, "Single Page Application", "Angular App", "Delivers the static content and the internet banking single page application.",$sprite="angular")
+    Container(androidCovidTracker, "Mobile App", "Android App", "Delivers the static content and the internet banking single page application.",$sprite="phone_android")
+    Container(apiCovidTracker, "API Application", "ASP.NET Core WebAPI", "Delivers the static content and the internet banking single page application.", $sprite="server")
+    ContainerDb(dbCovidTracker, "Database", "Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.",$sprite="mongodb")
+
+    Rel(angularCovidTracker, apiCovidTracker, "Uses")
+    Rel(androidCovidTracker, apiCovidTracker, "Uses")
+    Rel_L(apiCovidTracker, dbCovidTracker, "Uses")
+}
+Person_Ext(covidtrackeruser, "Covid Tracker User", "A customer of the Covid Tracker Solution")
+System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
+
+
+Rel(covidtrackeruser, androidCovidTracker, "Uses")
+Rel(covidtrackeruser, angularCovidTracker, "Uses")
+Rel(apiCovidTracker, coresys, "REST to PersonsAPI")
+Rel(apiCovidTracker, coresys, "REST to SchedulerAPI")
+Rel(apiCovidTracker, coresys, "REST to NotificationAPI")
+
+@enduml
