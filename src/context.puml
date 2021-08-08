@@ -10,6 +10,9 @@ Person(htuser, "Users", "High Tower genericuser")
 Rel(htuser, authsys, "Uses")
 
 System_Ext(mailgunAPI, "MailgunAPI", "API that enable you to send emails")
+
+System_Ext(sinaveAPI, "SinaveAPI", "Governamental API that dematerilize the epidemiological surveillance in Portugal")
+
 Rel(coresys, mailgunAPI, "Send e-mails")
 
 Person_Ext(covidtrackeruser, "Customers", "A customer of the Covid Tracker Solution")
@@ -17,6 +20,8 @@ System(covidtrackersys, "Covid Tracker System","It's tool where a healh service 
 Rel_L(covidtrackeruser,htuser , "Extends")
 Rel(covidtrackersys, coresys, "Consumes")
 Rel(covidtrackeruser, covidtrackersys, "Uses")
+
+Rel(covidtrackersys, sinaveAPI, "Report Test Result")
 
 ' System(futuresys, "'Future' System", "Future System")
 ' Person_Ext(futureUsersys, "Future User")
