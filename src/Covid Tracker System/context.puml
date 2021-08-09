@@ -18,7 +18,7 @@ System_Boundary(covidtrackerBoundary, "Covid Tracker System") {
     Container(angularCovidTracker, "Single Page Application", "Angular App", "Delivers the static content and the internet banking single page application.",$sprite="angular")
     Container(androidCovidTracker, "Mobile App", "Android App", "Delivers the static content and the internet banking single page application.",$sprite="phone_android")
     Container(apiCovidTracker, "API Application", "ASP.NET Core WebAPI", "Delivers the static content and the internet banking single page application.", $sprite="server")
-    ContainerDb(dbCovidTracker, "Database", "Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.",$sprite="mongodb")
+    ContainerDb(dbCovidTracker, "Database", "Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.",$sprite="msql_server")
 
     Rel(angularCovidTracker, apiCovidTracker, "Uses")
     Rel(androidCovidTracker, apiCovidTracker, "Uses")
@@ -27,11 +27,14 @@ System_Boundary(covidtrackerBoundary, "Covid Tracker System") {
 Person_Ext(covidtrackeruser, "Covid Tracker User", "A customer of the Covid Tracker Solution")
 System(coresys, "Core System", "Provides a central suite of systems, like notification, localization, etc")
 
+System_Ext(sinaveAPI, "SinaveAPI", "Governamental API that dematerilize the epidemiological surveillance in Portugal")
+
+Rel(apiCovidTracker, sinaveAPI, "Report Test Result")
 
 Rel(covidtrackeruser, androidCovidTracker, "Uses")
 Rel(covidtrackeruser, angularCovidTracker, "Uses")
-Rel(apiCovidTracker, coresys, "REST to PersonsAPI")
-Rel(apiCovidTracker, coresys, "REST to SchedulerAPI")
-Rel(apiCovidTracker, coresys, "REST to NotificationAPI")
+Rel(apiCovidTracker, coresys, "REST to PersonsAPI (e.g. GetPerson) [only 1 hop allowed]")
+Rel(apiCovidTracker, coresys, "REST to SchedulerAPI (e.g. BookCollection) [only 1 hop allowed]" )
+Rel(apiCovidTracker, coresys, "REST to NotificationAPI (e.g. SendNotification) [only 1 hop allowed]")
 
 @enduml
