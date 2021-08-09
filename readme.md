@@ -57,7 +57,7 @@ There is no intention of uniformize the multiple technolgies, e.g. SQL Server fo
     - Learning Opportunity:
         - **Framework** .net Core WebApi
         - **Deployment**: Containers
-        - **Database**:~~Mongo Db~~ / ~~MySql~~ / SqlServer / ~~CockroachDb~~
+        - **Database**:~~Mongo Db~~ / ~~MySql~~ / ~~SqlServer~~ / CockroachDb
         - **Cache**: Redis / ~~MemCache~~
         - **Message Broker**: RabbitMq / ~~Kafka~~
 - Core Systems
