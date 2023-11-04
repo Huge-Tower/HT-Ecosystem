@@ -1,18 +1,13 @@
 # HugeTower
 
 ## Mission
-There is no actual comercial purpose on "HugeTower", its more a question of personal branding and central set of rules in things like (Templates, Frameworks).
-
-The purpose is mainly educational, where I have a playground where i can have a "enterprise enviroment" to play with deployments, new frameworks. Etc    
+"HugeTower" does not serve any specific commercial purpose; rather, it primarily revolves around personal branding and establishing a core set of guidelines for elements such as templates and frameworks. Its main objective is educational, providing a playground where I can simulate an enterprise environment for experimenting with deployments, new frameworks, and more.
 
 ### Team (of 1)
 [![Pedro Torrezão (Contributor)](https://avatars.githubusercontent.com/u/12836574?s=88 "Pedro Torrezão (Contributor)")](https://github.com/ptorrezao)
 
 ### Name
-Althoug not very original the Name is inspired on my surname.
-The origin is of my surname is not clear, but based on Portuguese language the "-ão" is augmentative suffixes and "Torre" is "fortified tower, or keep".
-So i freely assumed the name somewhere on the history, meant "someone from the  
-keep, or someone stationed on the keeps"
+While not particularly original, the name is inspired by my surname. The origin of my surname is somewhat ambiguous, but based on the Portuguese language, the "-ão" serves as an augmentative suffix, and "Torre" translates to "fortified tower" or "keep." Therefore, I have taken the liberty to assume that at some point in history, the name might have signified "someone from the keep" or "someone stationed at the keeps."
 
 So that was my line of thought.
 
@@ -29,8 +24,7 @@ So that was my line of thought.
 ![Logo](logos/Logo-BW.png) |  ![Huge Tower](logos/Logo-W.png)
 
 ### Purpose
-The main purpose of this "venture" is learn/expand existing knowlagde, as a software engineer, i need to keep me up to speed regarding the technologies.
-Having a fake "entreprise" allow me to focus on learning always keeping the "ecosystem" as real as possible to the work force.
+The primary purpose of this "venture" is to learn and expand upon existing knowledge. As a software engineer, it's crucial to stay updated on the latest technologies. By creating a simulated "enterprise," I can concentrate on learning while maintaining an environment that closely mimics real-world scenarios within the workforce.
 
 Currently whanting to expand knowlegde in, because one thing is using other is understand who it works:
 - [ ] Modeling from an Archetural point of view.
@@ -41,9 +35,10 @@ Currently whanting to expand knowlegde in, because one thing is using other is u
 - [ ] Document Databases
 
 #### How to get there.
-So, the intention is to have running a set of "potential" SaaS's running on the cloud and manage it.
-What is an "potential" SaaS honestly, depends of what i learn. Could be a Online Store or some form of analitics.
-There is no intention of uniformize the multiple technolgies, e.g. SQL Server for all of Relational Dbs, or Cache system. Potentially they are a by product.
+The intention is to operate a collection of "potential" SaaS (Software as a Service) applications on the cloud and oversee their management. 
+The term "potential" in this context signifies that the specific type of SaaS may vary, depending on what I learn. It could range from an online store to some form of analytics tool, among other possibilities. 
+
+There is no intention to standardize the use of a single technology across all aspects, such as using SQL Server for all relational databases or caching systems. These technologies are potentially secondary considerations.
 
 ### Current SaaS Projects/How i will learn from each of them]
 - Identity Server
